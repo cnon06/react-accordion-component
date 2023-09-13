@@ -3,7 +3,13 @@ import { useState } from "react";
 const faqs = [
   {
     title: "Where are these chairs assembled?",
-    text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium, quaerat temporibus quas dolore provident nisi ut aliquid ratione beatae sequi aspernatur veniam repellendus.",
+    text: (
+      <em>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusantium,
+        quaerat <p style={{ color: "red" }}>temporibus quas dolore provident</p>
+        nisi ut aliquid ratione beatae sequi aspernatur veniam repellendus.
+      </em>
+    ),
   },
   {
     title: "How long do I have to return my chair?",
@@ -24,21 +30,32 @@ function App() {
 }
 
 function Accordion({ data }) {
+  const [currentNum, setCurrentNum] = useState(0);
   return (
     <div className="accordion">
       {data.map((item, index) => (
-        <AccordionItem item={item} num={index + 1} key={index} />
+        <AccordionItem
+          item={item}
+          num={index + 1}
+          key={index}
+          currentNum={currentNum}
+          setCurrentNum={setCurrentNum}
+        />
       ))}
     </div>
   );
 }
 
-function AccordionItem({ item, num }) {
-  const [isOpen, setIsOpen] = useState(false);
-
+function AccordionItem({ item, num, currentNum, setCurrentNum }) {
+  // const [isOpen, setIsOpen] = useState(false);
+  // let currentNum = num;
   function handleToggle() {
-    setIsOpen((isOpen) => !isOpen);
+    setCurrentNum(num);
+    // setIsOpen((isOpen) => !isOpen);
+    // currentNum = num;
   }
+  const isOpen = currentNum === num ? true : false;
+  // console.log(`Current num: ${currentNum}`);
 
   return (
     <div className="item" onClick={handleToggle}>

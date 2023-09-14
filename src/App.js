@@ -47,15 +47,10 @@ function Accordion({ data }) {
 }
 
 function AccordionItem({ item, num, currentNum, setCurrentNum }) {
-  // const [isOpen, setIsOpen] = useState(false);
-  // let currentNum = num;
-  function handleToggle() {
-    setCurrentNum(num);
-    // setIsOpen((isOpen) => !isOpen);
-    // currentNum = num;
-  }
   const isOpen = currentNum === num ? true : false;
-  // console.log(`Current num: ${currentNum}`);
+  function handleToggle() {
+    setCurrentNum(isOpen ? null : num);
+  }
 
   return (
     <div className="item" onClick={handleToggle}>
